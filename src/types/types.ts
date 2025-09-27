@@ -36,6 +36,7 @@ export type SeatCardProps = {
 
 
 
+
 export type Seat =  {
   seatNo: number;
   occupied: boolean;
