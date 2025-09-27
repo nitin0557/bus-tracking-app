@@ -22,6 +22,14 @@ export default function App() {
     []
   );
 
+const handleSeatEnter = useCallback(
+  (seatNo: number) => {
+    const name = prompt("Passenger name:", "");
+    if (!name) return;
+    handleEnter(seatNo, name);
+  },
+  [handleEnter]
+);
   const exportData = useCallback(() => {
     const blob = new Blob([JSON.stringify({ seats, events }, null, 2)], {
       type: "application/json",
@@ -76,13 +84,9 @@ export default function App() {
           />
           <SeatGrid
             seats={seats}
-            onEnter={(seatNo) => {
-              const name = prompt("Passenger name:", "");
-              if (!name) return;
-              handleEnter(seatNo, name); // pass both to the store
-            }}
+            onEnter={handleSeatEnter}
             onLeave={handleLeave}
-          />{" "}
+          />
         </section>
 
         <section className="bg-white rounded-lg shadow p-4">

@@ -29,7 +29,7 @@ export type SeatCardProps = {
   seatNo: number;
   occupied: boolean;
   passenger: Passenger | null;
-  onEnter: (seatNo: number, passengerName: string) => void; // ✅ two arguments
+  onEnter: (seatNo: number) => void; // ✅ two arguments
   onLeave: (seatNo: number) => void;
 }
 

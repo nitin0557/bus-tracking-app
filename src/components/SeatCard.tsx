@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { SeatCardProps } from "../types/types";
 
 export const SeatCard = React.memo(
   ({ seatNo, occupied, passenger, onEnter, onLeave }: SeatCardProps) => {
+    const handleEnterClick = useCallback(() => {
+  if (!occupied) onEnter(seatNo); // just notify parent
+}, [occupied, seatNo, onEnter]);
+
+    const handleLeaveClick = useCallback(() => {
+      if (occupied) onLeave(seatNo);
+    }, [occupied, seatNo, onLeave]);
+
     return (
       <div
         className={`p-3 rounded border ${
@@ -11,9 +19,7 @@ export const SeatCard = React.memo(
       >
         <div className="flex justify-between items-center mb-2">
           <strong>Seat {seatNo}</strong>
-          <span className="text-xs text-gray-500">
-            {occupied ? "Occupied" : "Empty"}
-          </span>
+          <span className="text-xs text-gray-500">{occupied ? "Occupied" : "Empty"}</span>
         </div>
         <div className="text-sm mb-3">
           {occupied ? (
@@ -29,24 +35,14 @@ export const SeatCard = React.memo(
         </div>
         <div className="flex gap-2">
           <button
-            className="flex-1 px-3 py-2 rounded bg-indigo-600 text-white text-sm sm:text-base"
-            onClick={() => {
-              if (!occupied) {
-                const name = prompt("Passenger name:", "");
-                if (!name) return;
-                onEnter(seatNo, name); // Pass seatNo + passengerName
-              }
-            }}
+            onClick={handleEnterClick}
+            className="flex-1 px-2 py-1 rounded bg-indigo-600 text-white"
           >
             Enter
           </button>
           <button
-            className="flex-1 px-3 py-2 rounded bg-amber-500 text-black text-sm sm:text-base"
-            onClick={() => {
-              if (occupied) {
-                onLeave(seatNo); // Only seatNo needed for leave
-              }
-            }}
+            onClick={handleLeaveClick}
+            className="flex-1 px-2 py-1 rounded bg-amber-500 text-black"
           >
             Leave
           </button>
