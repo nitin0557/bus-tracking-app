@@ -1,4 +1,3 @@
-// src/pages/Home.tsx
 import React, { useCallback, useState } from "react";
 import { useBusStore } from "../store/busStore";
 import { ControlPanel } from "../components/ControlPanel";
@@ -83,29 +82,26 @@ export default function SeatTracking() {
       totalSeats={SEAT_COUNT}
     >
       <header className="mb-6">
-        <div className="flex flex-row justify-between">
-        <div>
-        <h1 className="text-2xl font-bold">
-          Bus Conductor — Seat Tracker (10 seats)
-        </h1>
-        <p className="text-sm text-gray-600">
-          Track when passengers enter or leave each seat. State persists in
-          localStorage.
-        </p>
-        </div>
-        <div
-          onClick={() => {
-            // Clear localStorage or any auth tokens
-            localStorage.clear();
-            // Redirect to login page
-            window.location.href = "/" +
-                "" +
-                "";
-          }}
-          className="p-3 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          Logout
-        </div>
+        <div className="flex flex-col md:flex-row justify-between md:items-center space-y-2 md:space-y-0">
+          <div>
+            <h1 className="text-2xl font-bold">
+              Bus Conductor — Seat Tracker (10 seats)
+            </h1>
+            <p className="text-sm text-gray-600">
+              Track when passengers enter or leave each seat. State persists in
+              localStorage.
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = "/";
+            }}
+            className="w-full md:w-auto px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700 transition-colors duration-200 text-center"
+          >
+            Logout
+          </button>
         </div>
       </header>
 
