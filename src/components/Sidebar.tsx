@@ -95,14 +95,23 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-full w-64 bg-black text-white shadow-md transform transition-transform duration-300
-        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:static md:block z-30`}
+      className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-black via-gray-800 to-gray-700 shadow-lg p-4 flex flex-col transition-transform duration-300 overflow-y-auto z-30
+            ${
+              sidebarOpen ? "translate-x-0" : "-translate-x-full"
+            } md:translate-x-0`}
     >
-      <nav className="mt-12 p-4 space-y-1">{renderRoutes(routes)}</nav>
+      {/* Sidebar Header */}
+      <h2 className="text-2xl font-bold mb-6 text-white text-center md:text-left">
+        Bus Dashboard
+      </h2>
 
+      {/* Routes */}
+      <nav className="space-y-2 flex flex-col">{renderRoutes(routes)}</nav>
+
+      {/* Seat Occupancy Chart */}
       {showSeatOccupancy && (
-        <div className="p-4 mt-auto">
-          <h3 className="text-sm font-semibold mb-2 text-white">
+        <div className="mt-auto bg-gray-900 rounded-lg p-4 mt-8">
+          <h3 className="text-sm text-white mb-2 text-center md:text-left">
             Seat Occupancy
           </h3>
           <ResponsiveContainer width="100%" height={150}>
@@ -112,10 +121,13 @@ export default function Sidebar({
                 dataKey="value"
                 innerRadius={40}
                 outerRadius={60}
-                paddingAngle={2}
+                paddingAngle={5}
               >
                 {data.map((entry, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
             </PieChart>
