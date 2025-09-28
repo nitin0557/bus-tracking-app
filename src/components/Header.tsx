@@ -2,14 +2,26 @@ import React from "react";
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-blue-600 text-white p-4 flex flex-col md:flex-row md:justify-between md:items-center space-y-2 md:space-y-0">
-      <h1 className="text-xl font-bold text-center md:text-left">
-        Bus Booking Tracker
-      </h1>
-      <nav className="flex justify-center md:justify-end space-x-4">
-        <a href="/" className="hover:underline">Dashboard</a>
-        <a href="/bookings" className="hover:underline">Bookings</a>
-      </nav>
+    <header className="bg-gradient-to-r from-gray-600 via-black to-gray-800 text-white p-4 flex flex-col md:flex-row md:justify-between md:items-center space-y-2 md:space-y-0">
+      <h1 className="text-2xl font-bold mb-6 text-white text-center md:text-left animate-pulse">
+          Bus Booking Tracker
+        </h1>
+    
+      <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0">
+        <nav className="flex justify-center space-x-4">
+          <a href="/dashboard" className="hover:underline">Dashboard</a>
+          <a href="/bookings" className="hover:underline">Bookings</a>
+        </nav>
+        <div
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = "/";
+          }}
+          className="p-2.5 bg-white text-black rounded hover:white cursor-pointer text-center"
+        >
+          Logout
+        </div>
+      </div>
     </header>
   );
 };

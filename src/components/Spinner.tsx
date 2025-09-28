@@ -1,11 +1,10 @@
 // src/components/Spinner.tsx
 import React from "react";
 
-// Spinner.tsx
 const Spinner: React.FC = () => (
   <div className="flex justify-center items-center">
     <svg
-      className="animate-spin h-5 w-5 text-blue-400" // 👈 light blue
+      className="animate-spin h-10 w-10 text-blue-600" // 👈 increased size
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -26,6 +25,5 @@ const Spinner: React.FC = () => (
     </svg>
   </div>
 );
-
 
 export default Spinner;

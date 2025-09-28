@@ -7,6 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import { useBusStore } from "../store/busStore";
 import BookingDetailModal from "../components/BookingDetailModal";
 import Spinner from "../components/Spinner";
+import Header from "../components/Header";
 
 export default function Bookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -18,7 +19,7 @@ export default function Bookings() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
-  const [visibleCount, setVisibleCount] = useState(10); // Number of bookings visible initially
+  const [visibleCount, setVisibleCount] = useState(5); // Number of bookings visible initially
   const loaderRef = useRef<HTMLDivElement>(null);
 
   const { seats } = useBusStore();
@@ -81,57 +82,75 @@ export default function Bookings() {
     };
   }, [handleObserver]);
 
+  const displayedBookings = filteredBookings.slice(0, visibleCount);
+
+
   return (
     <>
       <DashboardLayout
         occupiedCount={seats.filter((s) => s.occupied).length}
         totalSeats={10}
       >
+        <Header />
         <div className="p-6 space-y-6 bg-white rounded-lg shadow-md">
           <h1 className="text-2xl font-semibold text-gray-800">Bookings</h1>
 
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-4">
+            {/* Source Filter */}
             <Filters sources={sourceFilter} onSourceChange={setSourceFilter} />
 
+            {/* Search Input */}
             <input
               type="text"
               placeholder="Search by passenger or Booking ID"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="px-3 py-1 border rounded"
+              className="px-3 py-2 border rounded-lg bg-gradient-to-r from-gray-800 via-gray-700 to-black text-white
+               placeholder-gray-400 transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
+            {/* Start Date */}
             <input
               type="date"
               value={startDate || ""}
               onChange={(e) => setStartDate(e.target.value)}
-              className="px-3 py-1 border rounded"
+              className="px-3 py-2 border rounded-lg bg-gradient-to-r from-gray-800 via-gray-700 to-black text-white
+               transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+
+            {/* End Date */}
             <input
               type="date"
               value={endDate || ""}
               onChange={(e) => setEndDate(e.target.value)}
-              className="px-3 py-1 border rounded"
+              className="px-3 py-2 border rounded-lg bg-gradient-to-r from-gray-800 via-gray-700 to-black text-white
+               transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
+            {/* Sort Field */}
             <select
               value={sortField}
               onChange={(e) => setSortField(e.target.value as "date" | "fare")}
-              className="px-3 py-1 border rounded"
+              className="px-3 py-2 border rounded-lg bg-gradient-to-r from-gray-800 via-gray-700 to-black text-white
+               transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="date">Date</option>
               <option value="fare">Fare</option>
             </select>
+
+            {/* Sort Order */}
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
-              className="px-3 py-1 border rounded"
+              className="px-3 py-2 border rounded-lg bg-gradient-to-r from-gray-800 via-gray-700 to-black text-white
+               transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
 
+            {/* Clear Filters */}
             {(sourceFilter || searchTerm || startDate || endDate) && (
               <button
                 onClick={() => {
@@ -140,7 +159,8 @@ export default function Bookings() {
                   setStartDate(null);
                   setEndDate(null);
                 }}
-                className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition"
+                className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600
+                 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400"
               >
                 Clear Filters
               </button>
@@ -149,19 +169,23 @@ export default function Bookings() {
 
           {/* Booking Table */}
           <div className="overflow-x-auto">
+          {displayedBookings.length > 0 ? (
             <BookingTable
-              bookings={filteredBookings.slice(0, visibleCount)}
+              bookings={displayedBookings}
               onRowClick={(booking) => setSelectedBooking(booking)}
             />
-          </div>
+          ) : (
+            <p className="text-gray-500 py-4">No bookings found.</p>
+          )}
+        </div>
 
-          {/* Loader for infinite scroll */}
-          <div
-            ref={loaderRef}
-            className="h-10 flex justify-center items-center"
-          >
-            {visibleCount < filteredBookings.length && <Spinner />}
-          </div>
+        {/* Loader */}
+        <div
+          ref={loaderRef}
+          className="h-10 flex justify-center items-center"
+        >
+          {visibleCount < filteredBookings.length && <Spinner />}
+        </div>
         </div>
       </DashboardLayout>
 

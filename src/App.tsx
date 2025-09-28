@@ -12,6 +12,7 @@ import BookingDetail from "./pages/BookingDetail";
 import Bookings from "./pages/Bookings";
 import SeatTracking from "./pages/SeatTracking";
 import Analytics from "./pages/Analytics";
+import Profile from "./components/Profile";
 
 const Login = lazy(() => import("./components/Login"));
 const Dashboard = lazy(() => import("./pages/SeatTracking"));
@@ -95,11 +96,41 @@ export default function App() {
                 }
               />
                <Route
-                path="/analytics"
+                path="/analytics/reports"
                 element={
                   <ProtectedRoute>
                     <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
                       <Analytics />
+                    </AppLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/analytics/statistics"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
+                      <Analytics />
+                    </AppLayout>
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="/settings/profile"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
+                      <Profile />
+                    </AppLayout>
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="/settings/preferences"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
+                      <Profile />
                     </AppLayout>
                   </ProtectedRoute>
                 }

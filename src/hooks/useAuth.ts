@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 
 type User = {
-  role: "Admin" | "BusConductor";
+  role: "Admin" | "BusContractor";
   email: string;
 } | null;
 

@@ -102,7 +102,7 @@ export default function SeatTracking() {
                 "" +
                 "";
           }}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          className="p-3 bg-red-600 text-white rounded hover:bg-red-700"
         >
           Logout
         </div>
