@@ -7,9 +7,14 @@ import AppLayout from "./components/AppLayout";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import NewDashboard from "./pages/NewDashboard";
+import BookingDetail from "./pages/BookingDetail";
+import Bookings from "./pages/Bookings";
+import SeatTracking from "./pages/SeatTracking";
+import Analytics from "./pages/Analytics";
 
 const Login = lazy(() => import("./components/Login"));
-const Dashboard = lazy(() => import("./pages/Dasboard"));
+const Dashboard = lazy(() => import("./pages/SeatTracking"));
 const Home = lazy(() => import("./pages/Home"));
 
 export default function App() {
@@ -52,7 +57,7 @@ export default function App() {
               <Route
                 path="/home"
                 element={
-                  <ProtectedRoute role="Manager">
+                  <ProtectedRoute role="Admin">
                     <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
                       <Home />
                     </AppLayout>
@@ -64,7 +69,37 @@ export default function App() {
                 element={
                   <ProtectedRoute>
                     <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
-                      <Dashboard />
+                      <NewDashboard />
+                    </AppLayout>
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="/seattracking"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
+                      <SeatTracking />
+                    </AppLayout>
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="/bookings"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
+                      <Bookings />
+                    </AppLayout>
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="/analytics"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout toggleTheme={toggleTheme} currentMode={mode}>
+                      <Analytics />
                     </AppLayout>
                   </ProtectedRoute>
                 }
