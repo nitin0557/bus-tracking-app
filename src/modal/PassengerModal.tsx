@@ -1,4 +1,3 @@
-// src/components/PassengerModal.tsx
 import React, { useState, useEffect } from "react";
 
 interface PassengerModalProps {
@@ -28,16 +27,13 @@ export const PassengerModal: React.FC<PassengerModalProps> = ({
     if (!open) return;
 
     setLoading(true);
-    fetch(
-      "https://countriesnow.space/api/v0.1/countries",
-      {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY", // replace with your API key
-          "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
-        },
-      }
-    )
+    fetch("https://countriesnow.space/api/v0.1/countries", {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY", // replace with your API key
+        "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
+      },
+    })
       .then((res) => res.json())
       .then((data) => setCities(data.data || []))
       .catch(console.error)

@@ -4,8 +4,8 @@ import { SeatCardProps } from "../types/types";
 export const SeatCard = React.memo(
   ({ seatNo, occupied, passenger, onEnter, onLeave }: SeatCardProps) => {
     const handleEnterClick = useCallback(() => {
-  if (!occupied) onEnter(seatNo); // just notify parent
-}, [occupied, seatNo, onEnter]);
+      if (!occupied) onEnter(seatNo); // just notify parent
+    }, [occupied, seatNo, onEnter]);
 
     const handleLeaveClick = useCallback(() => {
       if (occupied) onLeave(seatNo);
@@ -19,7 +19,9 @@ export const SeatCard = React.memo(
       >
         <div className="flex justify-between items-center mb-2">
           <strong>Seat {seatNo}</strong>
-          <span className="text-xs text-gray-500">{occupied ? "Occupied" : "Empty"}</span>
+          <span className="text-xs text-gray-500">
+            {occupied ? "Occupied" : "Empty"}
+          </span>
         </div>
         <div className="text-sm mb-3">
           {occupied ? (

@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 type ChartData = {
   name: string;
   value: number;
-  [key: string]: any; // <-- add this
+  [key: string]: any;
 };
 
 interface Props {

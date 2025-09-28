@@ -10,30 +10,29 @@ export default function Login() {
   const [error, setError] = useState("");
   const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
-  
-const handleSubmit = useCallback(
-  (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    if (!agree) {
-      setError("You must agree to the terms.");
-      return;
-    }
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const success = login(email, password);
+      if (!agree) {
+        setError("You must agree to the terms.");
+        return;
+      }
 
-    if (!success) {
-      setError("Invalid credentials");
-    } else {
-      navigate("/home");
-    }
-  },
-  [agree, email, password, login, navigate]
-);
+      const success = login(email, password);
+
+      if (!success) {
+        setError("Invalid credentials");
+      } else {
+        navigate("/home");
+      }
+    },
+    [agree, email, password, login, navigate]
+  );
 
   return (
     <div className="relative flex min-h-screen">
-
       <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-24 py-12 bg-customLight dark:bg-customDark dark:text-white">
         <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">
           Welcome Back

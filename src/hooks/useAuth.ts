@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-
-
 type User = {
   role: "Admin" | "BusContractor";
   email: string;

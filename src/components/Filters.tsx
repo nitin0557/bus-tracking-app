@@ -2,8 +2,8 @@
 import { Source } from "../types/types";
 
 export interface FiltersProps {
-  sources: Source | ""; // current selected value
-  onSourceChange: (value: Source | "") => void; // match the type of setSourceFilter
+  sources: Source | "";
+  onSourceChange: (value: Source | "") => void; 
 }
 
 const Filters: React.FC<FiltersProps> = ({ sources, onSourceChange }) => {
@@ -21,7 +21,6 @@ const Filters: React.FC<FiltersProps> = ({ sources, onSourceChange }) => {
         <option value="mybus">MyBus</option>
         <option value="personal">Personal</option>
       </select>
-      {/* Dropdown arrow */}
       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
         <svg
           className="w-4 h-4 text-white transition-transform duration-300"
@@ -29,7 +28,12 @@ const Filters: React.FC<FiltersProps> = ({ sources, onSourceChange }) => {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </div>
     </div>

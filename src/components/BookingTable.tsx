@@ -6,17 +6,30 @@ interface BookingTableProps {
   onRowClick?: (booking: Booking) => void;
 }
 
-export const BookingTable: React.FC<BookingTableProps> = ({ bookings, onRowClick }) => {
+export const BookingTable: React.FC<BookingTableProps> = ({
+  bookings,
+  onRowClick,
+}) => {
   return (
     <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white">
           <tr>
-            <th className="px-4 py-2 text-left text-sm font-medium uppercase">ID</th>
-            <th className="px-4 py-2 text-left text-sm font-medium uppercase">Passenger</th>
-            <th className="px-4 py-2 text-left text-sm font-medium uppercase">Source</th>
-            <th className="px-4 py-2 text-left text-sm font-medium uppercase">Destination</th>
-            <th className="px-4 py-2 text-left text-sm font-medium uppercase">Date</th>
+            <th className="px-4 py-2 text-left text-sm font-medium uppercase">
+              ID
+            </th>
+            <th className="px-4 py-2 text-left text-sm font-medium uppercase">
+              Passenger
+            </th>
+            <th className="px-4 py-2 text-left text-sm font-medium uppercase">
+              Source
+            </th>
+            <th className="px-4 py-2 text-left text-sm font-medium uppercase">
+              Destination
+            </th>
+            <th className="px-4 py-2 text-left text-sm font-medium uppercase">
+              Date
+            </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">

@@ -1,4 +1,3 @@
-// Inside AppLayout or Header component
 import { IconButton } from "@mui/material";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 

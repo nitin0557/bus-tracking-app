@@ -3,7 +3,7 @@ import { SeatCard } from "./SeatCard";
 import { SeatGridProps } from "../types/types";
 
 export const SeatGrid = React.memo(
-  ({ seats,onEnter, onLeave }: SeatGridProps) => {
+  ({ seats, onEnter, onLeave }: SeatGridProps) => {
     return (
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         {seats.map((seat) => (

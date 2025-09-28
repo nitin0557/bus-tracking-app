@@ -12,7 +12,7 @@ export const ControlPanel = React.memo(
     return (
       <div className="flex flex-col mb-2 sm:flex-row gap-2">
         <button
-          onClick={onExport} // ✅ attach handler
+          onClick={onExport}
           className="px-4 py-2 rounded bg-blue-600 text-white w-full sm:w-auto"
         >
           Export

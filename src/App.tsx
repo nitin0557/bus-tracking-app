@@ -7,16 +7,14 @@ import AppLayout from "./components/AppLayout";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import NewDashboard from "./pages/NewDashboard";
-import BookingDetail from "./pages/BookingDetail";
-import Bookings from "./pages/Bookings";
-import SeatTracking from "./pages/SeatTracking";
-import Analytics from "./pages/Analytics";
-import Profile from "./components/Profile";
 
-const Login = lazy(() => import("./components/Login"));
-const Dashboard = lazy(() => import("./pages/SeatTracking"));
+const SeatTracking = lazy(() => import("./pages/SeatTracking"));
+const NewDashboard = lazy(() => import("./pages/NewDashboard"));
+const Bookings = lazy(() => import("./pages/Bookings"));
+const Analytics = lazy(() => import("./pages/Analytics"));
+const Profile = lazy(() => import("./components/Profile"));
 const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./components/Login"));
 
 export default function App() {
   const [mode, setMode] = useState<"light" | "dark">("light"); // <-- theme mode state
@@ -44,8 +42,9 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <Suspense fallback={<div>{loadingText}</div>}>
-            {/* Example: Pass toggleTheme to AppLayout or Header */}
+          <Suspense
+            fallback={<div className="text-center mt-10">{loadingText}</div>}
+          >
             <Routes>
               <Route
                 path="/"
@@ -75,7 +74,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
-               <Route
+              <Route
                 path="/seattracking"
                 element={
                   <ProtectedRoute>
@@ -85,7 +84,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
-               <Route
+              <Route
                 path="/bookings"
                 element={
                   <ProtectedRoute>
@@ -95,7 +94,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
-               <Route
+              <Route
                 path="/analytics/reports"
                 element={
                   <ProtectedRoute>
@@ -115,7 +114,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
-               <Route
+              <Route
                 path="/settings/profile"
                 element={
                   <ProtectedRoute>
@@ -125,7 +124,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
-               <Route
+              <Route
                 path="/settings/preferences"
                 element={
                   <ProtectedRoute>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // only to navigate programmatically
+import { useNavigate, useLocation } from "react-router-dom"; 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 interface DashboardLayoutProps {

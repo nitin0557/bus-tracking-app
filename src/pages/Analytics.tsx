@@ -47,10 +47,10 @@ export default function Analytics() {
   }, [filteredBookings]);
 
   const bookingsByHour = useMemo(() => {
-    const counts: Record<number, number> = Array.from({ length: 24 }, (_, i) => 0).reduce(
-      (acc, _, idx) => ({ ...acc, [idx]: 0 }),
-      {}
-    );
+    const counts: Record<number, number> = Array.from(
+      { length: 24 },
+      (_, i) => 0
+    ).reduce((acc, _, idx) => ({ ...acc, [idx]: 0 }), {});
     filteredBookings.forEach((b) => {
       const hour = parseInt(b.time.split(":")[0], 10);
       counts[hour]++;
@@ -105,7 +105,7 @@ export default function Analytics() {
       occupiedCount={seats.filter((s) => s.occupied).length}
       totalSeats={10}
     >
-      <Header/>
+      <Header />
       <div className="p-4 md:p-6 space-y-6 bg-white rounded-lg shadow-md">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-800">
           Analytics

@@ -11,48 +11,52 @@ interface AuthContextType {
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = React.memo(({ children }) => {
-const [user, setUser] = useState<User>(() => {
-  const saved = localStorage.getItem("user");
-  if (!saved) return null;
-  try {
-    return JSON.parse(saved) as User;
-  } catch (e) {
-    console.warn("Failed to parse user from localStorage:", e);
-    localStorage.removeItem("user"); // optional: remove invalid data
-    return null;
+export const AuthProvider: React.FC<AuthProviderProps> = React.memo(
+  ({ children }) => {
+    const [user, setUser] = useState<User>(() => {
+      const saved = localStorage.getItem("user");
+      if (!saved) return null;
+      try {
+        return JSON.parse(saved) as User;
+      } catch (e) {
+        console.warn("Failed to parse user from localStorage:", e);
+        localStorage.removeItem("user"); // optional: remove invalid data
+        return null;
+      }
+    });
+
+    const login = useCallback((email: string, password: string) => {
+      if (email === "admin@mail.com" && password === "123456") {
+        const userData: User = { role: "Admin", email };
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        return true;
+      } else if (email === "contractor@mail.com" && password === "123456") {
+        const userData: User = { role: "BusContractor", email };
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        return true;
+      }
+      return false;
+    }, []);
+
+    const logout = () => {
+      setUser(null);
+      localStorage.removeItem("user");
+    };
+
+    return (
+      <AuthContext.Provider value={{ user, login, logout }}>
+        {children}
+      </AuthContext.Provider>
+    );
   }
-});
-
-  const login = useCallback((email: string, password: string) => {
-    if (email === "admin@mail.com" && password === "123456") {
-      const userData: User = { role: "Admin", email };
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
-      return true;
-    } else if (email === "contractor@mail.com" && password === "123456") {
-      const userData: User = { role: "BusContractor", email };
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
-      return true;
-    }
-    return false;
-  }, []);
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-  };
-
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-});
+);

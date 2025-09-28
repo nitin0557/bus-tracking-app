@@ -4,8 +4,6 @@ import { BusState, Event, Seat } from "./types";
 export const useBusStore = create<BusState>((set, get) => {
   const SEAT_COUNT = 10;
 
-  
-
   const makeInitialSeats = (): Seat[] =>
     Array.from({ length: SEAT_COUNT }, (_, i) => ({
       seatNo: i + 1,
@@ -14,9 +12,10 @@ export const useBusStore = create<BusState>((set, get) => {
     }));
 
   return {
-    seats: JSON.parse(localStorage.getItem("bus_seats_v1") || "null") || makeInitialSeats(),
+    seats:
+      JSON.parse(localStorage.getItem("bus_seats_v1") || "null") ||
+      makeInitialSeats(),
     events: JSON.parse(localStorage.getItem("bus_events_v1") || "null") || [],
-    
 
     setSeats: (seats) => {
       localStorage.setItem("bus_seats_v1", JSON.stringify(seats));
@@ -31,7 +30,14 @@ export const useBusStore = create<BusState>((set, get) => {
     handleEnter: (seatNo: number, passengerName: string) => {
       const seats = get().seats.map((s) =>
         s.seatNo === seatNo
-          ? { ...s, occupied: true, passenger: { name: passengerName, enteredAt: new Date().toISOString() } }
+          ? {
+              ...s,
+              occupied: true,
+              passenger: {
+                name: passengerName,
+                enteredAt: new Date().toISOString(),
+              },
+            }
           : s
       );
       get().setSeats(seats);
@@ -65,17 +71,16 @@ export const useBusStore = create<BusState>((set, get) => {
       };
       get().setEvents([newEvent, ...get().events]);
     },
-    
 
-   resetAll: () => {
-  const initialSeats = Array.from({ length: 10 }, (_, i) => ({
-    seatNo: i + 1,
-    occupied: false,
-    passenger: null,
-  }));
-  set({ seats: initialSeats, events: [] });
-  localStorage.removeItem("bus_seats_v1");
-  localStorage.removeItem("bus_events_v1");
-},
+    resetAll: () => {
+      const initialSeats = Array.from({ length: 10 }, (_, i) => ({
+        seatNo: i + 1,
+        occupied: false,
+        passenger: null,
+      }));
+      set({ seats: initialSeats, events: [] });
+      localStorage.removeItem("bus_seats_v1");
+      localStorage.removeItem("bus_events_v1");
+    },
   };
 });

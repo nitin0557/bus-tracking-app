@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  // darkMode is a boolean
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark";
   });

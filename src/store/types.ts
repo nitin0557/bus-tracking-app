@@ -1,21 +1,21 @@
 export type Passenger = {
   name: string;
   enteredAt: string;
-}
+};
 
-export type Seat =  {
+export type Seat = {
   seatNo: number;
   occupied: boolean;
   passenger: Passenger | null;
-}
+};
 
-export type Event= {
+export type Event = {
   id: number;
   seatNo: number;
   action: "enter" | "leave";
   name: string;
   time: string;
-}
+};
 
 export type BusState = {
   seats: Seat[];
@@ -25,4 +25,4 @@ export type BusState = {
   handleEnter: (seatNo: number, passengerName: string) => void;
   handleLeave: (seatNo: number) => void;
   resetAll: () => void;
-}
+};
