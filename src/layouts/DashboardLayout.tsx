@@ -28,22 +28,22 @@ export default function DashboardLayout({
         <h2 className="text-xl font-bold mb-6">Bus Dashboard</h2>
         <nav className="space-y-2">
           <Link
-            to="/"
+            to="/seattracking"
             className="block px-3 py-2 rounded hover:bg-gray-100 font-medium"
           >
             Seat Tracker
           </Link>
           <Link
-            to="/reports"
+            to="/bookings"
             className="block px-3 py-2 rounded hover:bg-gray-100 font-medium"
           >
-            Reports
+            Bookings List
           </Link>
           <Link
-            to="/settings"
+            to="/analytics"
             className="block px-3 py-2 rounded hover:bg-gray-100 font-medium"
           >
-            Settings
+            Analytics
           </Link>
         </nav>
 

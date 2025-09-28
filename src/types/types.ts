@@ -48,3 +48,37 @@ export type SeatGridProps = {
   onEnter: (seatNo: number) => void;
   onLeave: (seatNo: number) => void;
 }
+
+// src/types/types.ts
+export type Source = "mmt" | "goibibo" | "mybus" | "personal";
+
+export type Booking = {
+  id: number;
+  passengerName: string;
+  source: Source;
+  origin: string;
+  destination: string;
+  date: string;
+  time: string;
+  timestamp: number;
+  seats: number;
+  fare: number;
+  status: string;
+};
+
+
+
+export interface BusState {
+  seats: Seat[];
+  events: Event[];
+  bookings: Booking[]; // <— add this
+  setSeats: (seats: Seat[]) => void;
+  setEvents: (events: Event[]) => void;
+  // new methods:
+  setBookings: (bookings: Booking[]) => void;
+  addBooking: (booking: Booking) => void;
+  // existing:
+  handleEnter: (seatNo: number, passengerName: string) => void;
+  handleLeave: (seatNo: number) => void;
+  resetAll: () => void;
+}

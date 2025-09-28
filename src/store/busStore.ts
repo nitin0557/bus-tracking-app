@@ -4,6 +4,8 @@ import { BusState, Event, Seat } from "./types";
 export const useBusStore = create<BusState>((set, get) => {
   const SEAT_COUNT = 10;
 
+  
+
   const makeInitialSeats = (): Seat[] =>
     Array.from({ length: SEAT_COUNT }, (_, i) => ({
       seatNo: i + 1,
@@ -14,6 +16,7 @@ export const useBusStore = create<BusState>((set, get) => {
   return {
     seats: JSON.parse(localStorage.getItem("bus_seats_v1") || "null") || makeInitialSeats(),
     events: JSON.parse(localStorage.getItem("bus_events_v1") || "null") || [],
+    
 
     setSeats: (seats) => {
       localStorage.setItem("bus_seats_v1", JSON.stringify(seats));
@@ -62,6 +65,7 @@ export const useBusStore = create<BusState>((set, get) => {
       };
       get().setEvents([newEvent, ...get().events]);
     },
+    
 
    resetAll: () => {
   const initialSeats = Array.from({ length: 10 }, (_, i) => ({

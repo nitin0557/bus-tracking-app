@@ -1,7 +1,7 @@
 import React, { createContext, useState, useCallback, ReactNode } from "react";
 
 type User = {
-  role: "Manager" | "StoreKeeper";
+  role: "Admin" | "BusConductor";
   email: string;
 } | null;
 
@@ -31,13 +31,13 @@ const [user, setUser] = useState<User>(() => {
 });
 
   const login = useCallback((email: string, password: string) => {
-    if (email === "manager@slooze.com" && password === "123456") {
-      const userData: User = { role: "Manager", email };
+    if (email === "admin@mail.com" && password === "123456") {
+      const userData: User = { role: "Admin", email };
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
       return true;
-    } else if (email === "keeper@slooze.com" && password === "123456") {
-      const userData: User = { role: "StoreKeeper", email };
+    } else if (email === "conductor@mail.com" && password === "123456") {
+      const userData: User = { role: "BusConductor", email };
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
       return true;
