@@ -34,10 +34,20 @@ export default function Login() {
   return (
     <div className="relative flex min-h-screen">
       <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-24 py-12 bg-customLight dark:bg-customDark dark:text-white">
-        <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">
+        <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-blue-500">
           Welcome Back
         </h2>
         <p className="text-gray-500 mb-6">Sign Up For Free</p>
+
+        {/* 👉 Hints Section */}
+        <div className="mb-4 text-sm text-gray-600 dark:text-red-500">
+          <p>
+            <strong>Admin:</strong> admin@mail.com / <strong>123456</strong>
+          </p>
+          <p>
+            <strong>Contractor:</strong> contractor@mail.com / <strong>123456</strong>
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -46,7 +56,11 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="
+              w-full px-4 py-2 border border-gray-300 rounded-md
+              focus:outline-none focus:ring-2 focus:ring-blue-500
+              dark:text-blue-500
+            "
           />
 
           <input
@@ -55,7 +69,11 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="
+              w-full px-4 py-2 border border-gray-300 rounded-md
+              focus:outline-none focus:ring-2 focus:ring-blue-500
+              dark:text-blue-500
+            "
           />
 
           <label className="flex items-center text-sm text-gray-600">
